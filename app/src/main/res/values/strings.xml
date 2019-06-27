@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyCVApp</string>
+    <string name="personal_info">Personal Information</string>
+    <string name="education">Education</string>
+    <string name="experience">Experience</string>
+    <string name="skills">Skills</string>
+    <string name="courses">Courses</string>
+</resources>
