@@ -35,7 +35,7 @@ dependencies {
     implementation "javax.inject:javax.inject:${javaxInjectVersion}"
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     implementation "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
-    compile "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

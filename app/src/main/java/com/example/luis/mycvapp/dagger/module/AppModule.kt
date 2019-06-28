@@ -4,6 +4,7 @@ package com.example.luis.mycvapp.dagger.module
 import com.example.luis.domain.common.executor.PostExecutionThread
 import com.example.luis.mycvapp.MainActivity
 import com.example.luis.mycvapp.common.UiThread
+import com.example.luis.mycvapp.education.EducationInfoActivity
 import com.example.luis.mycvapp.personalinfo.PersonalInfoActivity
 import dagger.Binds
 import dagger.Module
@@ -21,4 +22,6 @@ abstract class AppModule {
     @ContributesAndroidInjector
     abstract fun bindMainActivity():MainActivity
 
+    @ContributesAndroidInjector
+    abstract fun bindEducationActivity():EducationInfoActivity
 }

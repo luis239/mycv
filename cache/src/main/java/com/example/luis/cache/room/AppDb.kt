@@ -4,39 +4,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.luis.cache.education.EducationEntity
+import com.example.luis.cache.education.dao.EducationDao
 import com.example.luis.cache.personalinfo.PersonalInformationEntity
 import com.example.luis.cache.personalinfo.dao.PersonalInfoDao
 import javax.inject.Inject
 
 @Database(
     version = 1,
-    entities = [PersonalInformationEntity::class],
+    entities = [PersonalInformationEntity::class,
+    EducationEntity::class],
             exportSchema = false)
 
 abstract class AppDb @Inject constructor() : RoomDatabase(){
 
 
     abstract fun personalInfoDao(): PersonalInfoDao
-
-    /*companion object {
-        private var INSTANCE: AppDb? = null
-
-        fun getDatabase(context: Context): AppDb {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDb::class.java,
-                    "app.db"
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }*/
+    abstract fun educationDao(): EducationDao
 
     companion object {
 

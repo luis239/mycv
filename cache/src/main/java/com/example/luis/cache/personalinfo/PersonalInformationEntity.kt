@@ -11,5 +11,6 @@ data class PersonalInformationEntity (
     var name:String,
     var email:String,
     var phone: String,
-    var image: String
+    var image: String,
+    var birthday:String
 )

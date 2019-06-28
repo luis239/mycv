@@ -4,5 +4,9 @@ import com.example.luis.cache.personalinfo.PersonalInformationEntity
 import com.example.luis.repository.personalinfo.model.PersonalInformationData
 
 fun PersonalInformationData.mapToCache():PersonalInformationEntity{
-    return PersonalInformationEntity(id, name, email, phone, image)
+    return PersonalInformationEntity(id, name, email, phone, image,birthday)
+}
+
+fun PersonalInformationEntity.mapToData():PersonalInformationData{
+    return PersonalInformationData(id, name, email, phone, image,birthday)
 }

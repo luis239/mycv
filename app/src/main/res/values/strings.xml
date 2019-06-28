@@ -5,4 +5,5 @@
     <string name="experience">Experience</string>
     <string name="skills">Skills</string>
     <string name="courses">Courses</string>
+    <string name="dialog_txt_cancel">Cancel</string>
 </resources>

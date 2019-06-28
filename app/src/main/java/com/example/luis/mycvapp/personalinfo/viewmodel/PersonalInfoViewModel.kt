@@ -3,15 +3,17 @@ package com.example.luis.mycvapp.personalinfo.viewmodel
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.luis.domain.personalinfo.GetPersonalInfoUseCase
 import com.example.luis.domain.personalinfo.SavePersonalInfoUseCsae
 import com.example.luis.domain.personalinfo.model.PersonalInformationModel
 import com.example.luis.mycvapp.common.Resource
 import io.reactivex.observers.DisposableCompletableObserver
+import io.reactivex.observers.DisposableMaybeObserver
 import javax.inject.Inject
 
 class PersonalInfoViewModel @Inject internal constructor(
-
-    private val savePersonalInfoUseCsae: SavePersonalInfoUseCsae
+    private val savePersonalInfoUseCsae: SavePersonalInfoUseCsae,
+    private val getPersonalInfoUseCase: GetPersonalInfoUseCase
 ) : ViewModel() {
 
     var name = MutableLiveData<String>()
@@ -22,6 +24,12 @@ class PersonalInfoViewModel @Inject internal constructor(
     var emailError = MutableLiveData<String>()
     var birthday = MutableLiveData<String>()
     var birthdayError = MutableLiveData<String>()
+
+    var pictureImageUri = MutableLiveData<String>()
+
+    init {
+        getPersonalInfo()
+    }
 
     private val response = MutableLiveData<Resource<Boolean>>()
 
@@ -66,18 +74,54 @@ class PersonalInfoViewModel @Inject internal constructor(
         return isValid
     }
 
-    fun savePersonalInfo(){
-        savePersonalInfoUseCsae.execute(object : DisposableCompletableObserver(){
-            override fun onError(e: Throwable) {
-                e.printStackTrace()
-                response.postValue(Resource.error(e.message))
+    fun savePersonalInfo(uri:String){
+        if(isValidFields()) {
+            savePersonalInfoUseCsae.execute(
+                object : DisposableCompletableObserver() {
+                    override fun onError(e: Throwable) {
+                        e.printStackTrace()
+                        response.postValue(Resource.error(e.message))
+                    }
+
+                    override fun onComplete() {
+                        response.postValue(Resource.completed())
+                    }
+
+                },
+                SavePersonalInfoUseCsae.Params(
+                    PersonalInformationModel(
+                        "1",
+                        name.value!!,
+                        email.value!!,
+                        phone.value!!,
+                        uri,
+                        birthday.value!!
+                    )
+                )
+            )
+        }
+    }
+
+    private fun getPersonalInfo(){
+        getPersonalInfoUseCase.execute(object : DisposableMaybeObserver<PersonalInformationModel>(){
+            override fun onSuccess(t: PersonalInformationModel) {
+                name.value = t.name
+                phone.value = t.phone
+                email.value = t.email
+                birthday.value = t.birthday
+                pictureImageUri.value = t.image
             }
 
             override fun onComplete() {
-                response.postValue(Resource.completed())
+
             }
 
-        },SavePersonalInfoUseCsae.Params(PersonalInformationModel("1",name.value!!,email.value!!,phone.value!!,"")))
+            override fun onError(e: Throwable) {
+
+            }
+
+        })
+
     }
 
 }

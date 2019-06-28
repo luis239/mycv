@@ -9,8 +9,8 @@ enum class ItemProfile constructor(
     @StringRes val resLabel: Int
 ){
 
-    PERSONAL_INFORMATION(R.drawable.ic_round_create_24px,R.string.personal_info),
-    EDUCATION(R.drawable.ic_round_create_24px,R.string.education),
+    PERSONAL_INFORMATION(R.drawable.ic_baseline_face_24px,R.string.personal_info),
+    EDUCATION(R.drawable.ic_baseline_school_24px,R.string.education),
     EXPERIENCE(R.drawable.ic_round_create_24px,R.string.experience),
     SKILLS(R.drawable.ic_round_create_24px,R.string.skills),
     COURSES(R.drawable.ic_round_create_24px,R.string.courses)

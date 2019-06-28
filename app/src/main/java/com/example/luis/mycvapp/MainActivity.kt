@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.luis.cache.personalinfo.PersonalInformationEntity
 import com.example.luis.cache.room.AppDb
 import com.example.luis.mycvapp.dagger.Injectable
 import com.example.luis.mycvapp.profile.ProfileActivity
@@ -15,7 +16,6 @@ class MainActivity : AppCompatActivity(), Injectable {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        AppDb.getInstance(this)
         createCv.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
